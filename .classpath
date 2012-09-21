@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry sourcepath="C:/Users/david/.gradle/caches/artifacts-13/filestore/org.apache.wicket/wicket-core/1.5.8/source/a593687355e7ebdd84365da9fd1c1509de059bc5/wicket-core-1.5.8-sources.jar" kind="lib" path="C:/Users/david/.gradle/caches/artifacts-13/filestore/org.apache.wicket/wicket-core/1.5.8/jar/dc1149f97feb94609d11086312998947a7286251/wicket-core-1.5.8.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/david/.gradle/caches/artifacts-13/filestore/org.slf4j/slf4j-api/1.6.1/source/46a386136c901748e6a3af67ebde6c22bc6b4524/slf4j-api-1.6.1-sources.jar" kind="lib" path="C:/Users/david/.gradle/caches/artifacts-13/filestore/org.slf4j/slf4j-api/1.6.1/jar/6f3b8a24bf970f17289b234284c94f43eb42f0e4/slf4j-api-1.6.1.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/david/.gradle/caches/artifacts-13/filestore/org.apache.wicket/wicket-util/1.5.8/source/a7fcc2d8fcea68101ef61c49ff2a92e97fabdcaa/wicket-util-1.5.8-sources.jar" kind="lib" path="C:/Users/david/.gradle/caches/artifacts-13/filestore/org.apache.wicket/wicket-util/1.5.8/jar/e23f294a4bc4fc243d2c32acc04cc587442ec79c/wicket-util-1.5.8.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/david/.gradle/caches/artifacts-13/filestore/org.apache.wicket/wicket-request/1.5.8/source/bff31c0c0d002240b22209dd232dc15040ce0384/wicket-request-1.5.8-sources.jar" kind="lib" path="C:/Users/david/.gradle/caches/artifacts-13/filestore/org.apache.wicket/wicket-request/1.5.8/jar/723ff8e04c826135b9b318288c4fe4c0d8f1174e/wicket-request-1.5.8.jar" exported="true"/>
+</classpath>
