@@ -21,12 +21,10 @@ public class BoundTypeInterceptor<T> implements MethodInterceptor {
 		}
 	}
 	
-	private final T object;
 	private final Map<String, BindingInformation> bindings = new HashMap<String, BindingInformation>();
 	private final Map<String, ActionBindingTarget<T>> actionBindings = new HashMap<String, ActionBindingTarget<T>>();
 
-	BoundTypeInterceptor(final T object) {
-		this.object = object;
+	BoundTypeInterceptor() {
 	}
 
 	@Override
@@ -55,14 +53,15 @@ public class BoundTypeInterceptor<T> implements MethodInterceptor {
 		} else if(actionBindingTarget != null) {
 			if(args.length == 0 || (args.length == 1 && AjaxRequestTarget.class.isInstance(args[0]))) {
 				if(args.length == 0) {
-					actionBindingTarget.getAction().onAction(object);
+					actionBindingTarget.getAction().onAction((T) obj);
 				} else {
-					actionBindingTarget.getAction().onAction(object, (AjaxRequestTarget) args[0]);
+					actionBindingTarget.getAction().onAction((T) obj, (AjaxRequestTarget) args[0]);
 				}
 				return null;
 			}
 		}
-		return proxy.invoke(object, args);
+		
+		return proxy.invokeSuper(obj, args);
 	}
 
 	public void setTarget(final String boundMethodName, final Object target, final String targetMethodName) {

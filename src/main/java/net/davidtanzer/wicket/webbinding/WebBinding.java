@@ -19,12 +19,16 @@ public class WebBinding {
 	private static ThreadLocal<BindingInformation> currentBinding = new ThreadLocal<BindingInformation>();
 	private static ThreadLocal<ActionBindingTarget<?>> currentActionBindingTarget = new ThreadLocal<ActionBindingTarget<?>>();
 	
-	public static <T> T bindable(final T object) {
+	public static <T> T bindable(final Class<T> superClass, final Object... constructorParameters) {
 		Enhancer enhancer = new Enhancer();
-		enhancer.setSuperclass(object.getClass());
-		enhancer.setCallback(new BoundTypeInterceptor<T>(object));
+		enhancer.setSuperclass(superClass);
+		enhancer.setCallback(new BoundTypeInterceptor<T>());
 		
-		return createEnhancedObject(object, enhancer);
+		Class<?>[] argumentTypes = new Class<?>[constructorParameters.length];
+		for(int i=0; i<constructorParameters.length; i++) {
+			argumentTypes[i] = constructorParameters[i].getClass();
+		}
+		return (T) enhancer.create(argumentTypes, constructorParameters);
 	}
 
 	public static <T> T target(final T object) {

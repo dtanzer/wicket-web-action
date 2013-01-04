@@ -51,7 +51,7 @@ public class BindVoidMethodToAction {
 	
 	@Test
 	public void boundActionWithNoParameterShouldExecuteMethodWithoutAjaxContext() {
-		TestClass bindable = WebBinding.bindable(new TestClass());
+		TestClass bindable = WebBinding.bindable(TestClass.class);
 		
 		WebBinding.bindAction(testAction()).when(bindable).onSubmit();
 		context = null;
@@ -64,7 +64,7 @@ public class BindVoidMethodToAction {
 	
 	@Test
 	public void boundActionWithAjaxParameterShouldExecuteMethodWithAjaxContext() {
-		TestClass bindable = WebBinding.bindable(new TestClass());
+		TestClass bindable = WebBinding.bindable(TestClass.class);
 		
 		WebBinding.bindAction(testAction()).when(bindable).onAjax(null);
 		context = null;

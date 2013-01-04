@@ -14,14 +14,14 @@ public class CreateNewBindableObjects {
 	
 	@Test
 	public void newBindableObjectMustNotBeNull() {
-		TestClass bindableObject = WebBinding.bindable(new TestClass("foo"));
+		TestClass bindableObject = WebBinding.bindable(TestClass.class, "foo");
 		
 		assertNotNull(bindableObject);
 	}
 	
 	@Test
 	public void newBindableObjectMustBeCompatibleWithOriginalClass() {
-		TestClass bindableObject = WebBinding.bindable(new TestClass("foo"));
+		TestClass bindableObject = WebBinding.bindable(TestClass.class, "foo");
 		
 		assertTrue(bindableObject instanceof TestClass);
 	}

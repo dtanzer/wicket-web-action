@@ -14,14 +14,14 @@ public class BindReturnValue {
 	
 	@Test
 	public void unboundMethodShouldReturnOriginalValue() {
-		TestClass bindable = WebBinding.bindable(new TestClass());
+		TestClass bindable = WebBinding.bindable(TestClass.class);
 		
 		assertFalse(bindable.isBound());
 	}
 	
 	@Test
 	public void boundMethodShouldReturnNewValue() {
-		TestClass bindable = WebBinding.bindable(new TestClass());
+		TestClass bindable = WebBinding.bindable(TestClass.class);
 		BindReturnValue target = WebBinding.target(this);
 		WebBinding.bind(bindable.isBound()).to(target.overrideIsBound());
 		
