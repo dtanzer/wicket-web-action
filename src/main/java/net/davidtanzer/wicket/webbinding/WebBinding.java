@@ -28,7 +28,25 @@ public class WebBinding {
 		for(int i=0; i<constructorParameters.length; i++) {
 			argumentTypes[i] = constructorParameters[i].getClass();
 		}
+		Constructor<?>[] constructors = superClass.getConstructors();
+		for(Constructor<?> c : constructors) {
+			if(argumentTypesCompatible(constructorParameters, c.getParameterTypes())) {
+				argumentTypes = c.getParameterTypes();
+				break;
+			}
+		}
 		return (T) enhancer.create(argumentTypes, constructorParameters);
+	}
+
+	private static boolean argumentTypesCompatible(final Object[] constructorParameters, final Class<?>[] parameterTypes) {
+		if(constructorParameters.length == parameterTypes.length) {
+			for(int i=0; i<constructorParameters.length; i++) {
+				if(!parameterTypes[i].isInstance(constructorParameters[i])) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	public static <T> T target(final T object) {
