@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'maven'
 
 repositories {
     mavenCentral()
@@ -11,10 +12,22 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
+configurations {
+    deployerJars
+}
+
 sourceCompatibility = 1.6
-version = '1.0'
+version = 'v01dr03'
 jar {
     manifest {
         attributes 'Implementation-Title': 'Wicket Web Action', 'Implementation-Version': version
+    }
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        configuration = configurations.deployerJars
+        repository(url: "file:../dtanzer-mvn-repo/releases")
+        pom.groupId='net.davidtanzer.wicket'
     }
 }
