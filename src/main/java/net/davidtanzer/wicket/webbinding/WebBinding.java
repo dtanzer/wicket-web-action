@@ -45,8 +45,9 @@ public class WebBinding {
 					return false;
 				}
 			}
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public static <T> T target(final T object) {
