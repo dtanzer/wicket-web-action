@@ -1,5 +1,7 @@
 #Wicket WebActions#
 
+wicket-web-action is a little library that makes it easier to decouple wicket pages from the rest of your application. It allows you to bind return values and actions of components instead of hard-coding them in your page class. You can find more information about it here: http://davidtanzer.net/wwa
+
 ##Include Wicket WebBinding in your project##
 
 Using gradle, you can get WebActions and WebBinding by adding a repository and a compile time dependency:
