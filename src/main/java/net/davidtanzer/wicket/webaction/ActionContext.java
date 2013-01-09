@@ -1,5 +1,5 @@
 /*
-Copyright 2012 David Tanzer (david@davidtanzer.net)
+Copyright 2012-2013 David Tanzer (david@davidtanzer.net)
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -19,6 +19,11 @@ import java.io.Serializable;
 
 import org.apache.wicket.Session;
 
+/**
+ * @deprecated
+ * Use "webbinding" (the static methods from net.davidtanzer.wicket.webbinding.WebBinding) instead.
+ */
+@Deprecated
 public interface ActionContext extends Serializable {
 	void error(String messageKey, Object... messageParams);
 

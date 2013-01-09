@@ -1,3 +1,18 @@
+/*
+Copyright 2012-2013 David Tanzer (david@davidtanzer.net)
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ */
 package net.davidtanzer.wicket.webbinding;
 
 import java.lang.reflect.Constructor;
@@ -18,6 +33,7 @@ public class WebBinding {
 	
 	private static ThreadLocal<BindingInformation> currentBinding = new ThreadLocal<BindingInformation>();
 	private static ThreadLocal<ActionBindingTarget<?>> currentActionBindingTarget = new ThreadLocal<ActionBindingTarget<?>>();
+	private static ThreadLocal<Boolean> bindingActive = new ThreadLocal<Boolean>();
 	
 	public static <T> T bindable(final Class<T> superClass, final Object... constructorParameters) {
 		Enhancer enhancer = new Enhancer();
@@ -50,16 +66,8 @@ public class WebBinding {
 		return false;
 	}
 
-	public static <T> T target(final T object) {
-		Enhancer enhancer = new Enhancer();
-		enhancer.setSuperclass(object.getClass());
-		enhancer.setCallback(new TargetTypeInterceptor<T>(object));
-		
-		return createEnhancedObject(object, enhancer);
-	}
-	
-	public static <T> BindingTarget<T> bind(final T bindableReturnValue) {
-		return new BindingTarget<T>();
+	public static BindingTarget bind(final Object bindableReturnValue) {
+		return new BindingTarget(bindableReturnValue.getClass());
 	}
 	
 	public static <T> ActionBindingTarget<T> bindAction(final BindableAction<T> action) {
@@ -79,43 +87,20 @@ public class WebBinding {
 	}
 	
 	static void currentBindingTarget(final TargetTypeInterceptor<?> targetInterceptor, final Method method) {
-		if(currentBinding.get() == null) {
-			throw new IllegalStateException("No current binding found!");
+		if(bindingActive.get() != null && bindingActive.get()) {
+			if(currentBinding.get() == null) {
+				throw new IllegalStateException("binding activ, but no current binding found!");
+			}
+			currentBinding.get().interceptor.setTarget(currentBinding.get().methodName, targetInterceptor.getObject(), method.getName());
+			currentBinding.set(null);
 		}
 		
-		currentBinding.get().interceptor.setTarget(currentBinding.get().methodName, targetInterceptor.getObject(), method.getName());
-		currentBinding.set(null);
+		bindingActive.set(false);
+	}
+
+	static void activateBinding() {
+		bindingActive.set(true);
 	}
 	
-	private static <T> T createEnhancedObject(final T object, final Enhancer enhancer) {
-		Constructor<?>[] constructors = object.getClass().getConstructors();
-		Constructor<?> bestConstructor = null;
-		for(Constructor<?> constructor : constructors) {
-			if(bestConstructor == null) {
-				bestConstructor = constructor;
-			} else if(constructor.getParameterTypes().length < bestConstructor.getParameterTypes().length) {
-				bestConstructor = constructor;
-			}
-		}
-		Class<?>[] parameterTypes = bestConstructor.getParameterTypes();
-		Object[] parameters = new Object[parameterTypes.length];
-		for(int i=0; i<parameterTypes.length; i++) {
-			Class<?> type = parameterTypes[i];
-			if(String.class.isAssignableFrom(type)) {
-				parameters[i] = "dummy";
-			} else if(int.class.isAssignableFrom(type)) {
-				parameters[i] = 0;
-			} else if(long.class.isAssignableFrom(type)) {
-				parameters[i] = 0L;
-			} else if(double.class.isAssignableFrom(type)) {
-				parameters[i] = 0.0;
-			} else if(boolean.class.isAssignableFrom(type)) {
-				parameters[i] = false;
-			} else {
-				parameters[i] = null;
-			}
-		}
-		return (T) enhancer.create(parameterTypes, parameters);
-	}
 }
 

@@ -13,15 +13,11 @@ Copyright 2012-2013 David Tanzer (david@davidtanzer.net)
    See the License for the specific language governing permissions and
    limitations under the License.
  */
-package net.davidtanzer.wicket.webbinding;
+package net.davidtanzer.wicket.webbinding.test.wicket.pages;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.html.WebPage;
 
-public abstract class BindableAction<T> {
-	public void onAction(final T targetComponent) {
-		onAction(targetComponent, null);
-	}
+public class RedirectTarget extends WebPage {
+	private static final long serialVersionUID = 1L;
 
-	public void onAction(final T targetComponent, final AjaxRequestTarget target) {
-	}
 }

@@ -1,5 +1,5 @@
 /*
-Copyright 2012 David Tanzer (david@davidtanzer.net)
+Copyright 2012-2013 David Tanzer (david@davidtanzer.net)
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -18,6 +18,11 @@ package net.davidtanzer.wicket.webaction;
 import org.apache.wicket.Component;
 import org.apache.wicket.Session;
 
+/**
+ * @deprecated
+ * Use "webbinding" (the static methods from net.davidtanzer.wicket.webbinding.WebBinding) instead.
+ */
+@Deprecated
 public abstract class ActionContextFactory {
 	private static ActionContextFactory factory;
 

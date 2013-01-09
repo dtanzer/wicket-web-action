@@ -1,5 +1,5 @@
 /*
-Copyright 2012 David Tanzer (david@davidtanzer.net)
+Copyright 2012-2013 David Tanzer (david@davidtanzer.net)
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -22,6 +22,11 @@ import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.ResourceModel;
 
+/**
+ * @deprecated
+ * Use "webbinding" (the static methods from net.davidtanzer.wicket.webbinding.WebBinding) instead.
+ */
+@Deprecated
 public class AjaxActionButton<ActionContextType extends ActionContext> extends AjaxButton {
 	private static final long serialVersionUID = 1L;
 	private final AbstractWebAction<ActionContextType> action;

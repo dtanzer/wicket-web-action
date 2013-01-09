@@ -1,3 +1,18 @@
+/*
+Copyright 2012-2013 David Tanzer (david@davidtanzer.net)
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ */
 package net.davidtanzer.wicket.webbinding;
 
 import java.lang.reflect.Method;
@@ -33,7 +48,7 @@ public class BoundTypeInterceptor<T> implements MethodInterceptor {
 		
 		ActionBindingTarget<T> actionBindingTarget = (ActionBindingTarget<T>) WebBinding.removeCurrentActionBindingTarget();
 		if(actionBindingTarget != null) {
-			if(args.length == 0 || (args.length == 1 && AjaxRequestTarget.class.isAssignableFrom(method.getParameterTypes()[0]))) {
+			if(args.length == 0 || (AjaxRequestTarget.class.isAssignableFrom(method.getParameterTypes()[0]))) {
 				actionBindings.put(method.getName(), actionBindingTarget);
 				return null;
 			} else {
@@ -51,7 +66,7 @@ public class BoundTypeInterceptor<T> implements MethodInterceptor {
 			Method targetMethod = bindingInfo.target.getClass().getMethod(bindingInfo.targetMethodName, new Class<?> [] {});
 			return targetMethod.invoke(bindingInfo.target);
 		} else if(actionBindingTarget != null) {
-			if(args.length == 0 || (args.length == 1 && AjaxRequestTarget.class.isInstance(args[0]))) {
+			if(args.length == 0 || (AjaxRequestTarget.class.isInstance(args[0]))) {
 				if(args.length == 0) {
 					actionBindingTarget.getAction().onAction((T) obj);
 				} else {
