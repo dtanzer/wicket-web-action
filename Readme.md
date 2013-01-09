@@ -4,6 +4,18 @@
 
 Using gradle, you can get WebActions and WebBinding by adding a repository and a compile time dependency:
 
+	repositories {
+		...
+		maven {
+			url('https://raw.github.com/dtanzer/dtanzer-mvn-repo/master/releases')
+		}
+	}
+
+	dependencies {
+		...
+		compile group: 'net.davidtanzer.wicket', name: 'wicket-web-action', version: 'v01dr04'
+	}
+
 ##How to use WebBinding##
 
 Wicket web actions allows you to to move code that reacts to user interactions out of your page classes. Consider the following code from a page class:
